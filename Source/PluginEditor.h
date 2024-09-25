@@ -8,26 +8,25 @@
 
 #pragma once
 
-#include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include <JuceHeader.h>
 
 //==============================================================================
 /**
-*/
-class SimpleEQAudioProcessorEditor  : public juce::AudioProcessorEditor
-{
-public:
-    SimpleEQAudioProcessorEditor (SimpleEQAudioProcessor&);
+ */
+class SimpleEQAudioProcessorEditor : public juce::AudioProcessorEditor {
+  public:
+    SimpleEQAudioProcessorEditor(SimpleEQAudioProcessor &);
     ~SimpleEQAudioProcessorEditor() override;
 
     //==============================================================================
-    void paint (juce::Graphics&) override;
+    void paint(juce::Graphics &) override;
     void resized() override;
 
-private:
+  private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
-    SimpleEQAudioProcessor& audioProcessor;
+    SimpleEQAudioProcessor &audioProcessor;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleEQAudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SimpleEQAudioProcessorEditor)
 };
