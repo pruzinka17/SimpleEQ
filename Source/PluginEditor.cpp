@@ -10,7 +10,17 @@
 #include "PluginProcessor.h"
 
 //==============================================================================
-SimpleEQAudioProcessorEditor::SimpleEQAudioProcessorEditor(SimpleEQAudioProcessor &p) : AudioProcessorEditor(&p), audioProcessor(p) {
+SimpleEQAudioProcessorEditor::SimpleEQAudioProcessorEditor(SimpleEQAudioProcessor &p)
+: AudioProcessorEditor(&p),
+audioProcessor(p),
+peakFreqSliderAttachment(audioProcessor.apvts, "Peak Freq", peakFreqSlider),
+peakGainSliderAttachment(audioProcessor.apvts, "Peak Gain", peakGainSlider),
+peakQualitySliderAttachment(audioProcessor.apvts, "Peak Quality", peakQualitySlider),
+lowCutFreqSliderAttachment(audioProcessor.apvts, "LowCut Freq", lowCutFreqSlider),
+highCutFreqSliderAttachment(audioProcessor.apvts, "HighCut Freq", highCutFreqSlider),
+lowCutSlopeSliderAttachment(audioProcessor.apvts, "LowCut Slope", lowCutSlopeSlider),
+highCutSlopeSliderAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlopeSlider)
+{
 	// Make sure that before the constructor has finished, you've set the
 	// editor's size to whatever you need it to be.
 	
@@ -25,21 +35,20 @@ SimpleEQAudioProcessorEditor::SimpleEQAudioProcessorEditor(SimpleEQAudioProcesso
 SimpleEQAudioProcessorEditor::~SimpleEQAudioProcessorEditor() {}
 
 //==============================================================================
-void SimpleEQAudioProcessorEditor::paint(juce::Graphics &g) {
+void SimpleEQAudioProcessorEditor::paint(juce::Graphics &g)
+{
+	auto bounds = getLocalBounds();
 	// (Our component is opaque, so we must completely fill the background with
 	// a solid colour)
-	g.fillAll(
-			  getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId)
-			  );
+	g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 	
 	g.setColour(juce::Colours::white);
 	g.setFont(juce::FontOptions(15.0f));
-	g.drawFittedText(
-					 "MADE BY MIRUN!", getLocalBounds(), juce::Justification::centred, 1
-					 );
+	g.drawFittedText("MADE BY MIRUN!", getLocalBounds(), juce::Justification::centred, 1);
 }
 
-void SimpleEQAudioProcessorEditor::resized() {
+void SimpleEQAudioProcessorEditor::resized()
+{
 	// This is generally where you'll want to lay out the positions of any
 	// subcomponents in your editor..
 	
